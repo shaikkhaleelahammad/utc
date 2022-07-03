@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TimeZone</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/stylesheet.css' %}">
+  </head>
+  <body>
+    <div class="header">
+      <a href="">Universal Time</a>
+    </div>
+    <h1>Filter UTC:</h1>
+    <form  method="post">
+        {% csrf_token %}
+        {{filterForm}}
+        <input type="submit" name="" value="submit">
+    </form>
+    <h2>Result:</h2>
+    <div>
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
+    </div>
+    <h1>All Timezones:</h1>
+    <table border="5">
+      <thead>
+        <th>VALUE</th>
+        <th>ABBR</th>
+        <th>OFFSET</th>
+        <th>ISDST</th>
+        <th>TEXT</th>
+        <th>UTC</th>
+      </thead>
+      {% for record in response%}
+      <tr>
+        <td>{{record.value}}</td>
+        <td>{{record.abbr}}</td>
+        <td>{{record.offset}}</td>
+        <td>{{record.isdst}}</td>
+        <td>{{record.text}}</td>
+        <td>{{record.utc}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
